@@ -1,0 +1,30 @@
+<h2 class="content-block">Clientes</h2>
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="clients"
+      keyExpr="id_client"
+      [columns]="['id_client', 'full_name', 'cellphone', 'birthdate']"
+      [showBorders]="true"
+      (onRowInserting)="logEvent($event, 'add')"
+      (onRowUpdating)="logEvent($event, 'update')"
+      (onRowRemoving)="logEvent($event, 'delete')"
+    >
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="Información del cliente" [showTitle]="true" [width]="700" [height]="400">
+        </dxo-popup>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+            <dxi-item dataField="full_name" caption="Nombre Completo"></dxi-item>
+            <dxi-item dataField="cellphone" caption="Celular"></dxi-item>
+            <dxi-item dataField="birthdate" caption="Fecha de Nacimiento"></dxi-item>
+          </dxi-item>
+        </dxo-form>
+      </dxo-editing>
+      <dxi-column dataField="full_name" caption="Nombre Completo"></dxi-column>
+      <dxi-column dataField="cellphone" caption="Celular"></dxi-column>
+      <dxi-column dataField="birthdate" caption="Fecha de Nacimiento" dataType="date"> </dxi-column>
+    </dx-data-grid>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<h2 class="content-block">Products</h2>
+
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="products"
+      keyExpr="id_product"
+      [columns]="['id_product', 'name', 'description', 'price', 'inventory']"
+      [showBorders]="true"
+      (onRowInserting)="logEvent($event, 'add')"
+      (onRowUpdating)="logEvent($event, 'update')"
+      (onRowRemoving)="logEvent($event, 'delete')"
+    >
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="Información del producto" [showTitle]="true" [width]="700" [height]="500">
+        </dxo-popup>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+            <dxi-item dataField="category_id" caption="Categoria"></dxi-item>
+            <dxi-item dataField="name" caption="Nombre"></dxi-item>
+            <dxi-item dataField="description" caption="Descripcion"></dxi-item>
+            <dxi-item dataField="price" caption="Precio"></dxi-item>
+            <dxi-item dataField="inventory" caption="Inventario"></dxi-item>
+          </dxi-item>
+        </dxo-form>
+      </dxo-editing>
+      <dxi-column dataField="id_product" caption="ID"></dxi-column>
+      <dxi-column dataField="category_id" caption="Categoria">
+        <dxo-lookup [dataSource]="categories" displayExpr="name" valueExpr="id_category">
+      </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="name" caption="Nombre"></dxi-column>
+      <dxi-column dataField="description" caption="Descripcion"></dxi-column>
+      <dxi-column dataField="price" caption="Precio"></dxi-column>
+      <dxi-column dataField="inventory" caption="Inventario"></dxi-column>
+    </dx-data-grid>
+  </div>
+</div>

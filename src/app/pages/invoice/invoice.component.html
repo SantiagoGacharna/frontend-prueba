@@ -1,0 +1,41 @@
+<h2 class="content-block">Facturas</h2>
+
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="invoices"
+      keyExpr="id_invoice"
+      [columns]="['id_invoice', 'client_id', 'invoice_price', 'invoice_date']"
+      [showBorders]="true"
+      (onRowInserting)="logEvent($event, 'add')"
+      (onRowUpdating)="logEvent($event, 'update')"
+      (onRowRemoving)="logEvent($event, 'delete')"
+    >
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        <dxo-popup title="Información de la factura" [showTitle]="true" [width]="700" [height]="500">
+        </dxo-popup>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+            <dxi-item dataField="client_id" caption="Nombre Cliente"></dxi-item>
+            <dxi-item dataField="invoice_price" caption="Precio"></dxi-item>
+            <dxi-item dataField="invoice_date" caption="Fecha Factura"></dxi-item>
+            <dxi-item dataField="product_id" caption="Productos"></dxi-item>
+            <dxi-item dataField="amount" caption="Cantidad"></dxi-item>
+          </dxi-item>
+        </dxo-form>
+      </dxo-editing>
+      <dxi-column dataField="client_id" caption="Nombre Cliente">
+        <dxo-lookup [dataSource]="clients" displayExpr="full_name" valueExpr="id_client">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="invoice_price" caption="Precio"></dxi-column>
+      <dxi-column dataField="invoice_date" caption="Fecha Factura" dataType="date"></dxi-column>
+      <dxi-column dataField="product_id" caption="Productos">
+        <dxo-lookup [dataSource]="products" valueExpr="id_product" displayExpr="name">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="amount" caption="Cantidad"></dxi-column>
+    </dx-data-grid>
+  </div>
+</div>

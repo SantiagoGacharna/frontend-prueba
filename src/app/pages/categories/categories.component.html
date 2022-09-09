@@ -1,0 +1,27 @@
+<h2 class="content-block">Categories</h2>
+<div class="content-block">
+    <div class="dx-card responsive-paddings">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="categories"
+        keyExpr="id_category"
+        [columns]="['id_category', 'name']"
+        [showBorders]="true"
+        (onRowInserting)="logEvent($event, 'add')"
+        (onRowUpdating)="logEvent($event, 'update')"
+        (onRowRemoving)="logEvent($event, 'delete')"
+      >
+        <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+          <dxo-popup title="Información de la categoria" [showTitle]="true" [width]="700" [height]="400">
+          </dxo-popup>
+          <dxo-form>
+            <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+              <dxi-item dataField="name" caption="Nombre"></dxi-item>
+            </dxi-item>
+          </dxo-form>
+        </dxo-editing>
+        <dxi-column dataField="id_category" caption="ID"></dxi-column>
+        <dxi-column dataField="name" caption="Nombre"></dxi-column>
+      </dx-data-grid>
+    </div>
+</div>
